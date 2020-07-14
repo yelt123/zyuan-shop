@@ -1,28 +1,51 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" v-cloak>
+    <div class="status" v-if="status">123</div>
+    <my-default v-else />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import myDefault from "@/layout/Default.vue";
 
 export default {
-  name: 'App',
+  data() {
+    return {
+      status: false
+    };
+  },
+  name: "App",
   components: {
-    HelloWorld
+    myDefault
+  },
+  beforeCreate() {
+    this.status = true;
+  },
+  mounted() {
+    this.status = false;
+  },
+  watch: {
+    // $route() {
+    //   console.log(this.$route.meta);
+    // }
   }
-}
+};
 </script>
 
 <style>
+@import "./assets/css/Reset.css";
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  /* padding-bottom: 10vh; */
+}
+.status {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(2, 2, 2, 0.5);
+}
+[v-cloak] {
+  display: none;
 }
 </style>
